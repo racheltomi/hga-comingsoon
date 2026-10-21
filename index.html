@@ -130,10 +130,8 @@ h1 .hl{background:linear-gradient(100deg,#ff7a74 0%,#E62429 35%,#ffb3ae 50%,#E62
   background:conic-gradient(from var(--a) at 50% 60%,rgba(230,36,41,.55),rgba(255,210,122,.35),rgba(154,163,181,.35),rgba(230,36,41,.55)),#1a0c0c;animation:edge 9s linear infinite}
 .prize::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 7px,rgba(255,255,255,.08) 7px 8px),radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(0,0,0,.55) 85%)}
 .prize>*{position:relative}
-.prize small{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8)}
-.prize .big{font-family:var(--cond);font-weight:800;font-size:calc(var(--w) * .25);line-height:.9;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.5)}
-.prize .what{font-size:15px;font-weight:700}
-.prize .by{margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.prize .big{font-family:var(--cond);font-weight:800;font-size:calc(var(--w) * .17);line-height:.9;letter-spacing:.01em;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.5)}
+.prize .what{max-width:22ch;font-size:15px;font-weight:700;line-height:1.35}
 .foil{position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity .7s var(--ease);
   cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><defs><radialGradient id='g' cx='35%25' cy='30%25'><stop offset='0' stop-color='%23fff3c4'/><stop offset='.55' stop-color='%23e0b54a'/><stop offset='1' stop-color='%23a07322'/></radialGradient></defs><circle cx='20' cy='20' r='17' fill='url(%23g)' stroke='%237a5414' stroke-width='2'/><circle cx='20' cy='20' r='12' fill='none' stroke='%237a5414' stroke-opacity='.5'/><path d='M20 12l2.4 5 5.4.6-4 3.7 1.1 5.3L20 24l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z' fill='%237a5414'/></svg>") 20 20,grab}
 .window.revealed .foil{opacity:0;pointer-events:none}
@@ -144,11 +142,7 @@ h1 .hl{background:linear-gradient(100deg,#ff7a74 0%,#E62429 35%,#ffb3ae 50%,#E62
 .hint{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--text-2)}
 .hint .coin{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c4,#e0b54a 55%,#a07322);box-shadow:0 0 0 1.5px #7a5414;animation:coin 2s ease-in-out infinite}
 @keyframes coin{0%,100%{transform:translateX(0) rotate(0)}50%{transform:translateX(8px) rotate(25deg)}}
-.found{display:none;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:rgba(255,210,122,.1);border:1px solid rgba(255,210,122,.35);font-size:14px;font-weight:600;animation:pop .6s var(--ease)}
-.found a{color:var(--gold);font-weight:800;text-decoration:none}
-.found a:hover{text-decoration:underline}
 .stage.done .hint{display:none}
-.stage.done .found{display:inline-flex}
 .burst{position:absolute;left:50%;top:44%;width:0;height:0;pointer-events:none;z-index:5}
 .burst i{position:absolute;width:9px;height:14px;border-radius:2px;opacity:0;animation:fly 1.3s var(--ease) forwards}
 @keyframes fly{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r))}}
@@ -245,10 +239,8 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
                 <div class="card-top"><img src="./assets/hga-glass.svg" alt="HGA Glass" width="96" height="16"><span class="gr" aria-label="Grade unknown"><small>GRADE</small><b>??</b></span></div>
                 <div class="window" id="win">
                   <div class="prize" aria-live="polite">
-                    <small>Up for grabs</small>
-                    <span class="big">$4,999</span>
-                    <span class="what">An HGA graded card</span>
-                    <span class="by">Details by email</span>
+                    <span class="big">GOTCHA!</span>
+                    <span class="what">Details only go to email. Sign up to see them.</span>
                   </div>
                   <canvas class="foil" id="foil" role="img" aria-label="Silver scratch panel. Scratch it to see what's up for grabs."></canvas>
                 </div>
@@ -260,7 +252,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
         </div>
         <div class="under">
           <p class="hint"><span class="coin" aria-hidden="true"></span>Scratch the card to peek</p>
-          <p class="found" role="status">You found it. <a href="#join" id="claim">Claim your spot &rarr;</a></p>
         </div>
         <div class="burst" id="burst" aria-hidden="true"></div>
       </div>
@@ -311,7 +302,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
       .catch(function () { btn.disabled = false; err.textContent = "Something went wrong. Please try again."; err.hidden = false; });
   });
   /* "Claim your spot" focuses the email field */
-  document.getElementById("claim").addEventListener("click", function (e) { e.preventDefault(); document.getElementById("join").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); setTimeout(function () { var i = document.getElementById("email"); if (i) i.focus({ preventScroll: true }); }, reduce ? 0 : 500); });
 
   /* ---------- Odometer: $0 -> $4,999 ---------- */
 
@@ -345,7 +335,7 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
   }
   function reveal() {
     if (revealed) return; revealed = true;
-    box.classList.add("revealed"); stage.classList.add("done");
+    box.classList.add("revealed"); stage.classList.add("done"); if (tilt) { tilt.classList.remove("live"); tilt.style.setProperty("--rx", "0deg"); tilt.style.setProperty("--ry", "0deg"); }
     if (!reduce) burst();
     setTimeout(function () { var f = document.getElementById("field"); if (f) { f.classList.remove("nudge"); void f.offsetWidth; f.classList.add("nudge"); } }, 500);
   }
@@ -365,7 +355,7 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
   /* ---------- Card tilts toward the pointer; glare follows ---------- */
   if (reduce || !fine) return;
   var tilt = document.getElementById("tilt"), card = document.getElementById("card"), glare = document.getElementById("glare"), raf = 0, ev;
-  stage.addEventListener("pointermove", function (e) { if (drawing) return; ev = e; tilt.classList.add("live"); if (!raf) raf = requestAnimationFrame(function () {
+  stage.addEventListener("pointermove", function (e) { if (drawing || stage.classList.contains("done")) return; ev = e; tilt.classList.add("live"); if (!raf) raf = requestAnimationFrame(function () {
     raf = 0; var r = card.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
     tilt.style.setProperty("--ry", ((x - .5) * 16).toFixed(2) + "deg"); tilt.style.setProperty("--rx", ((.5 - y) * 12).toFixed(2) + "deg");
     glare.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); glare.style.setProperty("--my", (y * 100).toFixed(1) + "%");
