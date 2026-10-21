@@ -70,8 +70,6 @@ img{display:block;max-width:100%}
 @keyframes mq{to{transform:translateX(-50%)}}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,80px);align-items:center}
 
-.kicker{display:inline-flex;align-items:center;gap:12px;margin:0 0 22px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--hot)}
-.kicker::before{content:"";width:34px;height:2px;background:var(--red)}
 h1{margin:0;font-weight:800;font-size:clamp(32px,calc(3.5vw + 12px),70px);line-height:.96;letter-spacing:-.04em;text-wrap:balance}
 h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em;margin-bottom:-.06em}
 h1 .w>span{display:inline-block;transform:translateY(105%);animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--d) * 70ms + 200ms)}
@@ -121,7 +119,7 @@ h1 .hl{background:linear-gradient(100deg,#ff7a74 0%,#E62429 35%,#ffb3ae 50%,#E62
 .card-in{position:relative;height:100%;border-radius:23px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;gap:14px;padding:18px;
   background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(255,255,255,.08),transparent 60%),linear-gradient(160deg,#1d1818,#0c0a0a 55%,#171212)}
 .card-top{display:flex;align-items:center;justify-content:space-between}
-.card-top img{height:22px;width:auto}
+.card-top img{height:20px;width:auto}
 .card-top .gr{display:grid;place-items:center;padding:5px 9px;border:1.5px solid rgba(255,255,255,.8);border-radius:6px;line-height:1}
 .card-top .gr small{font-size:8px;font-weight:700;letter-spacing:.12em}
 .card-top .gr b{font-family:var(--cond);font-size:22px}
@@ -156,7 +154,7 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
 .social svg{width:16px;height:16px}
 .legal{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
 .foot-left{display:flex;flex-direction:column;gap:16px}
-.powered{margin:0;display:inline-flex;align-items:center;gap:18px;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.powered{margin:0;white-space:nowrap;display:inline-flex;align-items:center;gap:18px;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
 .uc{display:inline-flex;align-items:center;gap:.08em;font-weight:800;font-size:25px;line-height:1;letter-spacing:.01em;color:#fff}
 .uc-u{display:inline-grid;place-items:center;width:1.25em;height:1.25em;margin-right:.1em;border:2.5px solid #6f9bb8;border-radius:.3em;color:#6f9bb8;font-size:.92em}
 .uc-e{display:inline-block;width:.56em;height:.72em;margin:0 .04em;background:linear-gradient(currentColor,currentColor) 0 0/100% 20% no-repeat,linear-gradient(currentColor,currentColor) 0 50%/82% 20% no-repeat,linear-gradient(currentColor,currentColor) 0 100%/100% 20% no-repeat}
@@ -170,21 +168,31 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
-  .hero{padding:96px 0 48px}
-  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero{min-height:0;padding:104px 0 56px}
+  .hero-grid{grid-template-columns:1fr;gap:0;justify-items:center;text-align:center}
   .copy{display:contents}
-  .kicker{order:1}h1{order:2}.lede{order:3}.stage{order:4}.join{order:5}.fine{order:6}
+  h1{order:2;max-width:640px;font-size:clamp(27px,8.6vw,54px)}
+  .lede{order:3;margin:18px auto 0;max-width:460px}
+  .stage{order:4;margin-top:36px}
+  .join{order:5;width:100%;max-width:460px;margin:24px auto 0}
+  .fine{order:6;max-width:460px;margin:14px auto 0;text-align:center}
   .card{--w:clamp(230px,62vw,300px)}
-  h1{font-size:clamp(27px,8.6vw,54px)}
   .marquee.m1{top:8%}.marquee.m2{top:56%}
+  .foot-row{flex-direction:column;align-items:center;text-align:center}
+  .foot-left{align-items:center}
+  .social,.legal{justify-content:center}
 }
 @media (max-width:560px){
-  .bar .wrap{height:64px}
-  .bar .logo img{height:28px}
-  .live{display:none}
+  .bar .wrap{height:auto;justify-content:center;padding-top:18px;padding-bottom:12px}
+  .bar .logo img{height:40px}
+  .bar .right{display:none}
+  .hero{padding-top:112px}
   .field{flex-direction:column;padding:8px}
   .go{width:100%}
-  .foot-row{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:380px){
+  .powered{gap:12px;letter-spacing:.16em;font-size:11px}
+  .uc{font-size:22px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -212,7 +220,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
 
     <div class="wrap hero-grid">
       <div class="copy">
-        <p class="kicker in" style="--i:0">HGA &middot; Giveaway</p>
         <h1 id="title"><span class="w"><span style="--d:0">Something</span></span> <span class="w"><span class="hl" style="--d:1">Innovative</span></span> <span class="w"><span class="hl" style="--d:2">And</span></span> <span class="w"><span class="hl" style="--d:3">Unique</span></span> <span class="w"><span style="--d:4">Is</span></span> <span class="w"><span style="--d:5">Coming</span></span> <span class="w"><span style="--d:6">Soon.</span></span></h1>
         <p class="lede in" style="--i:2">An HGA graded card valued up to <span class="gold">$4,999</span> is up for grabs. <b>Details are coming by email.</b></p>
 
@@ -236,7 +243,7 @@ footer{position:relative;border-top:1px solid var(--line);padding:26px 0 max(26p
           <div class="bob">
             <div class="card" id="card">
               <div class="card-in">
-                <div class="card-top"><img src="./assets/hga-glass.svg" alt="HGA Glass" width="96" height="16"><span class="gr" aria-label="Grade unknown"><small>GRADE</small><b>??</b></span></div>
+                <div class="card-top"><img src="./assets/hga-mark.svg" alt="HGA" width="82" height="20"><span class="gr" aria-label="Grade unknown"><small>GRADE</small><b>??</b></span></div>
                 <div class="window" id="win">
                   <div class="prize" aria-live="polite">
                     <span class="big">GOTCHA!</span>
